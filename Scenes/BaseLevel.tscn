@@ -1,0 +1,70 @@
+[gd_scene load_steps=8 format=3 uid="uid://mfu7mp73nbk3"]
+
+[ext_resource type="MeshLibrary" uid="uid://cxjnuf1bdu6d1" path="res://MeshLibrary/SpaceLibrary.tres" id="1_flhrr"]
+[ext_resource type="PackedScene" uid="uid://c63bwcchio3ny" path="res://Scenes/enemy.tscn" id="2_hqm3o"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_2n4vu"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_6cuxf"]
+sky_material = SubResource("ProceduralSkyMaterial_2n4vu")
+
+[sub_resource type="Environment" id="Environment_dsdf3"]
+background_mode = 2
+sky = SubResource("Sky_6cuxf")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w6oyp"]
+albedo_color = Color(0.145098, 0.145098, 0.145098, 1)
+
+[sub_resource type="Curve3D" id="Curve3D_cy7m1"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -25, 0, 6, 0, 0, 0, 0, 0, 0, 13.9892, 0, 5.90665, 0, 0, 0, 0, 0, 0, 14, 0, -2, 0, 0, 0, 0, 0, 0, -14, 0, -2, 0, 0, 0, 0, 0, 0, -13.965, 0, -13.3454),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0)
+}
+point_count = 5
+
+[node name="BaseLevel" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_dsdf3")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+shadow_enabled = true
+
+[node name="BaseFloor" type="CSGBox3D" parent="."]
+transform = Transform3D(100, 0, 0, 0, 1, 0, 0, 0, 100, 0, -0.5, 0)
+material_override = SubResource("StandardMaterial3D_w6oyp")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.422618, 0.906308, 0, -0.906308, 0.422618, -1.756, 15, 9.18127)
+
+[node name="GridMap" type="GridMap" parent="."]
+mesh_library = ExtResource("1_flhrr")
+cell_size = Vector3(4, 4, 4)
+cell_center_y = false
+data = {
+"cells": PackedInt32Array(65533, 2, 0, 65532, 2, 0, 65531, 2, 0, 65531, 0, 0, 65531, 65535, 0, 3, 2, 0, 2, 2, 0, 1, 2, 0, 0, 2, 0, 65532, 0, 0, 65533, 0, 0, 65534, 0, 0, 65535, 0, 0, 0, 0, 0, 1, 0, 0, 2, 0, 0, 65530, 0, 0, 65530, 65535, 0, 65530, 65534, 0, 65530, 65533, 0, 65533, 65533, 0, 65534, 65533, 0, 65535, 65533, 0, 0, 65533, 0, 1, 65533, 0, 2, 65533, 0, 3, 65533, 0, 4, 65533, 0, 4, 65534, 0, 4, 65535, 0, 4, 0, 0, 4, 1, 0, 4, 2, 0, 65535, 2, 0, 65534, 2, 0, 65530, 2, 0, 65531, 65533, 0, 65531, 65534, 0, 65533, 65534, 0, 65534, 65534, 0, 65535, 65534, 0, 0, 65534, 0, 1, 65534, 0, 2, 65534, 0, 3, 65534, 0)
+}
+
+[node name="Path3D" type="Path3D" parent="."]
+curve = SubResource("Curve3D_cy7m1")
+
+[node name="CSGPolygon3D" type="CSGPolygon3D" parent="Path3D"]
+transform = Transform3D(1, 0, 0, 0, 0.15, 0, 0, 0, 1, 0, 0, 0)
+mode = 2
+path_node = NodePath("..")
+path_interval_type = 0
+path_interval = 1.0
+path_simplify_angle = 0.0
+path_rotation = 2
+path_local = false
+path_continuous_u = true
+path_u_distance = 1.0
+path_joined = false
+
+[node name="Enemy" parent="Path3D" instance=ExtResource("2_hqm3o")]
+transform = Transform3D(0.00239415, 0, -0.999997, 0, 1, 0, 0.999997, 0, 0.00239415, -25, 0, 6)
