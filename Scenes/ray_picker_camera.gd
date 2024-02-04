@@ -15,6 +15,7 @@ func _process(delta):
 	ray_cast_3d.force_raycast_update()
 	
 	if ray_cast_3d.is_colliding():
+		Input.set_default_cursor_shape(Input.CURSOR_POINTING_HAND)
 		var collider = ray_cast_3d.get_collider()
 		if collider is GridMap:
 			var collision_point = ray_cast_3d.get_collision_point()
@@ -22,5 +23,8 @@ func _process(delta):
 			
 			# Sometime non base cells are also marked as red. So before setting cell item we are
 			# checking if there is a cell item and it's value is 0. Here 0 means white tile
-			if gridmap.get_cell_item(cell) == 0:
-				gridmap.set_cell_item(cell, 1)
+			if Input.is_action_pressed("click"):			
+				if gridmap.get_cell_item(cell) == 0:
+					gridmap.set_cell_item(cell, 1)
+	else:
+		Input.set_default_cursor_shape(Input.CURSOR_ARROW)
