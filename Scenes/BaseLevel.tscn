@@ -43,8 +43,10 @@ shadow_enabled = true
 transform = Transform3D(100, 0, 0, 0, 1, 0, 0, 0, 100, 0, -0.5, 0)
 material_override = SubResource("StandardMaterial3D_w6oyp")
 
-[node name="RayPickerCamera" parent="." node_paths=PackedStringArray("gridmap") instance=ExtResource("1_eqqv8")]
+[node name="RayPickerCamera" parent="." node_paths=PackedStringArray("gridmap", "turret_manager") instance=ExtResource("1_eqqv8")]
+transform = Transform3D(1, 0, 0, 0, 0.572146, 0.820152, 0, -0.820152, 0.572146, -1.756, 14.033, 10.995)
 gridmap = NodePath("../GridMap")
+turret_manager = NodePath("../TurretManager")
 
 [node name="GridMap" type="GridMap" parent="."]
 mesh_library = ExtResource("1_flhrr")
