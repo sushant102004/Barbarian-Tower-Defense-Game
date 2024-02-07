@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://dimyahce7kjr6"]
 
-[ext_resource type="Script" path="res://Projectile.gd" id="1_7378k"]
+[ext_resource type="Script" path="res://projectile.gd" id="1_qqpcl"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7c77e"]
 albedo_color = Color(1, 0, 0, 1)
@@ -11,7 +11,8 @@ material = SubResource("StandardMaterial3D_7c77e")
 [sub_resource type="SphereShape3D" id="SphereShape3D_teiq2"]
 
 [node name="Projectile" type="Area3D"]
-script = ExtResource("1_7378k")
+top_level = true
+script = ExtResource("1_qqpcl")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0, 0)
