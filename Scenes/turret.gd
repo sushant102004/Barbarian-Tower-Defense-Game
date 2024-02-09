@@ -8,7 +8,6 @@ var enemy_path : Node3D
 func _physics_process(delta):
 	var enemy = enemy_path.get_children().back()
 	look_at(enemy.global_position, Vector3.UP, true)
-	print(enemy)
 
 func _on_timer_timeout():
 	var shot = projectile.instantiate()
