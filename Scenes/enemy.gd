@@ -1,7 +1,7 @@
 extends PathFollow3D
 
 @export var enemy_movement_speed : float = 0
-@export var max_health := 50.0
+@export var max_health := 100.0
 @export var enemy_kill_reward : int = 15
 
 @onready var base = get_tree().get_first_node_in_group("base")

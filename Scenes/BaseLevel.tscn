@@ -84,6 +84,7 @@ path_u_distance = 1.0
 path_joined = false
 
 [node name="Timer" type="Timer" parent="EnemyPath"]
+wait_time = 2.0
 autostart = true
 
 [node name="Base" parent="." instance=ExtResource("3_m1yhr")]
