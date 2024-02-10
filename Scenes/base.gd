@@ -11,11 +11,11 @@ var current_health : float:
 
 func _ready() -> void:
 	current_health = max_health
-	label.text = str(max_health)
+	label.text = str(current_health) + "/" + str(max_health)
 
 func take_damage() -> void:
 	current_health -= 1
-	label.text = str(current_health)
+	label.text = str(current_health) + "/" + str(max_health)
 
 func _process(delta: float) -> void:
 	pass

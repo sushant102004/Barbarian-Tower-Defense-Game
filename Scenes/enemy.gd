@@ -23,7 +23,7 @@ func _ready():
 	current_health = max_health
 		
 func _process(delta: float) -> void:
-	progress += delta + enemy_movement_speed / 2.5
+	progress += delta + enemy_movement_speed / 3
 	if progress_ratio == 1:
 		base.take_damage()
 		set_process(false)
