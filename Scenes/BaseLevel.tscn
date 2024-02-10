@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://mfu7mp73nbk3"]
+[gd_scene load_steps=15 format=3 uid="uid://mfu7mp73nbk3"]
 
 [ext_resource type="PackedScene" uid="uid://c5cggbhjhbeca" path="res://Scenes/ray_picker_camera.tscn" id="1_eqqv8"]
 [ext_resource type="MeshLibrary" uid="uid://cxjnuf1bdu6d1" path="res://MeshLibrary/SpaceLibrary.tres" id="1_flhrr"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://Scenes/EnemyPath.gd" id="3_mr6m0"]
 [ext_resource type="Script" path="res://Scenes/turret_manager.gd" id="5_pc30r"]
 [ext_resource type="PackedScene" uid="uid://bt7ahbg0cgvs5" path="res://Scenes/turret.tscn" id="6_an2dp"]
+[ext_resource type="Script" path="res://Scenes/GoldSystem.gd" id="8_eia2g"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_2n4vu"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -30,6 +31,11 @@ _data = {
 "tilts": PackedFloat32Array(0, 0, 0, 0, 0)
 }
 point_count = 5
+
+[sub_resource type="LabelSettings" id="LabelSettings_41wwe"]
+line_spacing = 64.0
+outline_size = 6
+outline_color = Color(0, 0, 0, 1)
 
 [node name="Level" type="Node3D"]
 
@@ -86,5 +92,26 @@ autostart = true
 script = ExtResource("5_pc30r")
 turret = ExtResource("6_an2dp")
 enemy_path = NodePath("../EnemyPath")
+
+[node name="GoldSystem" type="MarginContainer" parent="." groups=["GoldSystem"]]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+script = ExtResource("8_eia2g")
+starting_gold = 200
+
+[node name="GoldPlaceholder" type="Label" parent="GoldSystem"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+text = "Placeholder"
+label_settings = SubResource("LabelSettings_41wwe")
 
 [connection signal="timeout" from="EnemyPath/Timer" to="EnemyPath" method="spawn_enemy"]
