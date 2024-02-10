@@ -7,6 +7,7 @@ var enemy_path : Node3D
 var target : PathFollow3D
 
 @onready var turret_top : MeshInstance3D = $TurretBase/TurretTop/FaceOne
+@onready var animation_player = $AnimationPlayer
 
 
 func _physics_process(delta):
@@ -17,6 +18,7 @@ func _physics_process(delta):
 
 func _on_timer_timeout():
 	if target:
+		animation_player.play("Fire")
 		var shot = projectile.instantiate()
 		add_child(shot)
 		shot.global_position = turret_top.global_position

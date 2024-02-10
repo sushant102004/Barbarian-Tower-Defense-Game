@@ -4,12 +4,13 @@ extends PathFollow3D
 @export var max_health := 50.0
 
 @onready var base = get_tree().get_first_node_in_group("base")
+@onready var animation_player = $AnimationPlayer
 
 
 var current_health : float:
 	set (health):
 		current_health = health
-		
+		animation_player.play("TakeDamage")
 		# Destroying Enemy Scene
 		if current_health < 1:
 			queue_free()
